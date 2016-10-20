@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .clock {
+            width: 600px;
+            height: 600px;
+            margin: 100px auto;
+            background: url(images/clock.jpg) no-repeat;
+            position: relative;
+        }
+
+        .clock div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url(images/hour.png) no-repeat center center;
+        }
+
+        #m {
+            background-image: url(images/minute.png);
+        }
+
+        #s {
+            background-image: url(images/second.png);
+        }
+    </style>
+</head>
+<body>
+<div class="clock">
+    <div id="h"></div>
+    <div id="m"></div>
+    <div id="s"></div>
+</div>
+<script>
+    //找对象
+    var hh = document.getElementById("h");//时针
+    var mm = document.getElementById("m");//分针
+    var ss = document.getElementById("s");//秒针
+
+    //根据当前时间 让盒子转动指定的角度
+
+    function clock() {
+        //获取当前时间 计算各个对象要旋转的角度
+        var d = new Date();
+        //秒针
+        var s = d.getSeconds();//当前是多少秒
+        //一圈360° 60秒 一圈 一秒 6°
+        ss.style.transform = "rotate(" + (s * 6) + "deg)";
+        //分针
+        var m = d.getMinutes();//当前是多少分钟
+        //一圈360° 60分 一圈 一分 6°
+        mm.style.transform = "rotate(" + (m * 6) + "deg)";
+        //小时
+        var h = d.getHours();//当前是多少小时
+        //一圈360° 12小时 一圈 小时 30°
+        h = h % 12;
+        hh.style.transform = "rotate(" + (h * 30) + "deg)";
+
+    }
+
+    setInterval(clock, 1000);//每秒钟渲染一次
+
+</script>
+</body>
+</html>
